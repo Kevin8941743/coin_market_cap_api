@@ -95,3 +95,8 @@ app.get("/coin/:type", limiter, async (req, res) => {
         })
     }
 })
+
+app.listen(port, () => {
+    console.log(`The server is now listening to port: ${port}`)
+})
+
