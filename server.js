@@ -33,3 +33,17 @@ const limiter = rateLimit({
     windowMs: 20 * 60 * 1000,
     message: "Please wait 20 minutes before sending API requests!"
 })
+
+app.get("/everything", async (req, res) => {
+
+    try {
+        const api_data = await axios.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+            {
+                headers: {
+                    Accept: "application/json",
+                    "X-CMC_PRO_API_KEY": API_KEY
+                }
+            }
+    )
+
+    res.json(api_data.data)
