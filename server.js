@@ -68,3 +68,14 @@ app.get("/coin/:type", limiter, async (req, res) => {
             console.log(`Checking the cache for ${typing}`)
             return res.json(JSON.parse(redis_cache))
         }
+
+        console.log("Searching through the API...")
+
+        const api_data = await axios.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+            {
+                headers: {
+                    Accept: "application/json",
+                    "X-CMC_PRO_API_KEY": API_KEY
+                }
+            }
+        )
