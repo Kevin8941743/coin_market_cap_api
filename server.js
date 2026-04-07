@@ -79,3 +79,19 @@ app.get("/coin/:type", limiter, async (req, res) => {
                 }
             }
         )
+
+        const finding = api_data.data.data.find(f => f.name.toLowerCase() === typing)
+
+        await client.setEx(typing, 3600, JSON.stringify(finding))
+
+        res.json(finding)
+
+    } catch (error) {
+        console.log(error)
+
+        res.status(500).json({
+            error: "Could not access the API", 
+            details: error.message
+        })
+    }
+})
