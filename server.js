@@ -27,3 +27,9 @@ try {
 } catch (error) {
     console.error("Failed to connect to Redis!", error.message)
 }
+
+const limiter = rateLimit({
+    max: 15,
+    windowMs: 20 * 60 * 1000,
+    message: "Please wait 20 minutes before sending API requests!"
+})
