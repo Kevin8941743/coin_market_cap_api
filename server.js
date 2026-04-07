@@ -56,3 +56,15 @@ app.get("/everything", async (req, res) => {
         details: error.message
     })
 }})
+
+app.get("/coin/:type", limiter, async (req, res) => {
+    try {
+        
+        const typing = req.params.type.toLowerCase()
+        
+        const redis_cache = await client.get(typing)
+
+        if (redis_cache) {
+            console.log(`Checking the cache for ${typing}`)
+            return res.json(JSON.parse(redis_cache))
+        }
