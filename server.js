@@ -47,3 +47,12 @@ app.get("/everything", async (req, res) => {
     )
 
     res.json(api_data.data)
+
+} catch (error) {
+    console.log(error)
+
+    res.status(500).json({
+        error: "Unable to access the API!",
+        details: error.message
+    })
+}})
