@@ -13,3 +13,17 @@ const API_KEY = process.env.API_KEY
 const client = createClient({
     url: process.env.REDIS_URL
 })
+
+try {
+    await mongoose.connect(MongoDB)
+    console.log("Connection to MongoDB Atlas has been successful!")
+} catch (error) {
+    console.error("Failed to connect to Mongo Atlas", error.message)
+}
+
+try { 
+    await client.connect()
+    console.log("The redis cache has been connected!")
+} catch (error) {
+    console.error("Failed to connect to Redis!", error.message)
+}
